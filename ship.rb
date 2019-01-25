@@ -10,13 +10,11 @@ class Ship
   	@health-=1
   end
 
-  def alive?
-  	@health.zero? ? false : true
+  def sunk?
+  	@health.zero? ? true : false
   end
 
   def fits? board
-  	puts board.length
-  	puts coordinates[:y] + size
   	return false if coordinates[:x] < 0 || coordinates[:y] < 0
 		return false if coordinates[:x] + size > board.length
 		return false if coordinates[:y] + size > board.width
@@ -27,11 +25,9 @@ class Ship
 
   def does_not_overlap? board
   	return false if !board.state[coordinates[:x]][coordinates[:y]].empty? 
-
-  	case orientation
-  	when :horizontal
+  	if horizontal?
   		spread_horizontal(board) { |x| return false if !board.state[x][coordinates[:y]].empty? }
-  	when :vertical
+  	elsif vertical? 
   		spread_vertical(board) { |y| return false if !board.state[coordinates[:x]][y].empty? }
   	end
   	true
@@ -39,35 +35,29 @@ class Ship
 
   def place_on board
   	board.state[coordinates[:x]][coordinates[:y]] = type
-  	case orientation
-		when :horizontal
-			spread_horizontal(board) { |x|	board.state[x][coordinates[:y]] = type }
-		when :vertical
-			puts 'vertical'
-			spread_vertical(board) { |y| board.state[coordinates[:x]][y] = type }
-		end 
+		spread_horizontal(board) { |x|	board.state[x][coordinates[:y]] = type } if horizontal?
+		spread_vertical(board) { |y| board.state[coordinates[:x]][y] = type } if vertical? 
 		board
   end
 
-  def hit? opponent, missle
-  	opponent.fleet.all.each do |ship|
-  	  case orientation
-  		when horizontal
-  			# ??rizontal |x| { true if missle[:x][:y] ship[:x][:y] }
-  		end
-  	end
+  def spread_horizontal(board=nil)
+  	((coordinates[:x])..(coordinates[:x]+size-1)).each { |x| yield(x) }
   end
 
-  def spread_horizontal(board = nil)
-  	((coordinates[:x])..(coordinates[:x+size-1])).each { |x| yield(x) }
-  end
-
-  def spread_vertical(board)
+  def spread_vertical(board=nil)
   	((coordinates[:y])..(coordinates[:y]+size-1)).each { |y| yield(y) }
   end
 
   def location
-   spread_horizontal {|x| [coordinates[:x]][x]}
+	  return spread_horizontal {|x| x }.to_a.map {|x| [x, coordinate[:y]] } if horizontal?
+	  spread_vertical {|y| y }.to_a.map {|y| [coordinates[:x],y] } if vertical?
   end
 
+  def horizontal?
+  	orientation === :horizontal ? true : false
+  end
+
+  def vertical? 
+		orientation === :vertical ? true : false
+  end
 end

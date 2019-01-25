@@ -14,6 +14,14 @@ class Fleet
 	def all
 	 [@carrier, @battleship, @cruiser, @submarine, @destroyer]
 	end
+
+	def direct_hit?(opponent, missile)
+  	opponent.fleet.all.each do |ship|
+  		next if ship.location.nil?
+  		ship.location.each { |coordinates| return ship if [missile[:x], missile[:y]] == coordinates }
+  	end
+  	false
+  end
 end
 
 class Carrier < Ship
