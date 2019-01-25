@@ -10,6 +10,10 @@ class Fleet
 		@submarine = Submarine.new
 		@destroyer = Destroyer.new
 	end
+
+	def all
+	 [@carrier, @battleship, @cruiser, @submarine, @destroyer]
+	end
 end
 
 class Carrier < Ship

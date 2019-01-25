@@ -1,5 +1,5 @@
 class Ship
-	attr_accessor :size, :orientation, :health, :type, :coordinates
+	attr_accessor :size, :orientation, :health, :type, :coordinates, :location
 
   def initialize(orientation = :horizontal)
   	@health = self.size
@@ -30,9 +30,9 @@ class Ship
 
   	case orientation
   	when :horizontal
-  		x_range(board) { |x| return false if !board.state[x][coordinates[:y]].empty? }
+  		spread_horizontal(board) { |x| return false if !board.state[x][coordinates[:y]].empty? }
   	when :vertical
-  		y_range(board) { |y| return false if !board.state[coordinates[:x]][y].empty? }
+  		spread_vertical(board) { |y| return false if !board.state[coordinates[:x]][y].empty? }
   	end
   	true
   end
@@ -41,19 +41,33 @@ class Ship
   	board.state[coordinates[:x]][coordinates[:y]] = type
   	case orientation
 		when :horizontal
-			occupy_x(board) { |x|	board.state[x][coordinates[:y]] = type }
+			spread_horizontal(board) { |x|	board.state[x][coordinates[:y]] = type }
 		when :vertical
 			puts 'vertical'
-			occupy_y(board) { |y| board.state[coordinates[:x]][y] = type }
+			spread_vertical(board) { |y| board.state[coordinates[:x]][y] = type }
 		end 
 		board
   end
 
-  def spread_horizontal(board)
+  def hit? opponent, missle
+  	opponent.fleet.all.each do |ship|
+  	  case orientation
+  		when horizontal
+  			# ??rizontal |x| { true if missle[:x][:y] ship[:x][:y] }
+  		end
+  	end
+  end
+
+  def spread_horizontal(board = nil)
   	((coordinates[:x])..(coordinates[:x+size-1])).each { |x| yield(x) }
   end
 
   def spread_vertical(board)
   	((coordinates[:y])..(coordinates[:y]+size-1)).each { |y| yield(y) }
   end
+
+  def location
+   spread_horizontal {|x| [coordinates[:x]][x]}
+  end
+
 end

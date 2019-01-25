@@ -1,14 +1,17 @@
 require './fleet.rb'
+require './board.rb'
 
 class Player
 
-	attr_accessor :fleet
+	attr_accessor :fleet, :board, :opponent
 
-	def initialize
+	def initialize()
 		@fleet = Fleet.new
+		@board = Board.new
+		@opponent = 
 	end
 
-	def place_ship board, options={}
+	def place_ship options={}
 		ship = @fleet.send options[:type]
 		ship.orientation = options[:orientation]
 		ship.coordinates = options[:coordinates]
@@ -19,5 +22,9 @@ class Player
 		else
 			false 
 		end
+	end
+
+	def fire_shot(enemy_fleet)
+		shots.state
 	end
 end
