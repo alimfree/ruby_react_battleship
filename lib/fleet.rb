@@ -1,8 +1,9 @@
-require './ship.rb'
+require 'ship.rb'
+require 'ships.rb'
 
 # Fleet
 class Fleet
-  attr_accessor :carrier, :battleship, :cruiser, :submarine, :destoryer
+  attr_reader :carrier, :battleship, :cruiser, :submarine, :destoryer
 
   def initialize
     @carrier = Carrier.new
@@ -25,45 +26,5 @@ class Fleet
       end
     end
     false
-  end
-end
-
-# Carrier
-class Carrier < Ship
-  def initialize
-    @size = 5
-    super
-  end
-end
-
-# Battleship
-class Battleship < Ship
-  def initialize
-    @size = 4
-    super
-  end
-end
-
-# Cruiser
-class Cruiser < Ship
-  def initialize
-    @size = 3
-    super
-  end
-end
-
-# Submarine
-class Submarine < Ship
-  def initialize
-    @size = 3
-    super
-  end
-end
-
-# Destroyer
-class Destroyer < Ship
-  def initialize
-    @size = 2
-    super
   end
 end

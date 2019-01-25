@@ -1,5 +1,5 @@
-require './fleet.rb'
-require './board.rb'
+require 'fleet.rb'
+require 'board.rb'
 
 # Player
 class Player
