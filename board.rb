@@ -10,6 +10,5 @@ class Board
 
   def create
   	@state = Array.new(length) {Array.new(width,"")}
-  	#@state = Array.new(length, 'empty') { Array.new(width, 'empty') }
   end
 end
