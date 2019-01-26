@@ -24,7 +24,7 @@ RSpec.describe Battleship do
     expect(Battleship.superclass.name).to eq 'Ship'
   end
 
-  it 'defaults to size 5' do
+  it 'defaults to size 4' do
     expect(subject.size).to eq 4
   end
 end
@@ -38,7 +38,7 @@ RSpec.describe Cruiser do
     expect(Cruiser.superclass.name).to eq 'Ship'
   end
 
-  it 'defaults to size 5' do
+  it 'defaults to size 3' do
     expect(subject.size).to eq 3
   end
 end
@@ -52,7 +52,7 @@ RSpec.describe Submarine do
     expect(Submarine.superclass.name).to eq 'Ship'
   end
 
-  it 'defaults to size 5' do
+  it 'defaults to size 3' do
     expect(subject.size).to eq 3
   end
 end
@@ -66,7 +66,7 @@ RSpec.describe Destroyer do
     expect(Destroyer.superclass.name).to eq 'Ship'
   end
 
-  it 'defaults to size 5' do
+  it 'defaults to size 2' do
     expect(subject.size).to eq 2
   end
 end
