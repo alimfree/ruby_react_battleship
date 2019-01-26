@@ -1,6 +1,4 @@
-require 'spec_helper'
-require 'fleet'
-require 'player'
+require 'rails_helper'
 
 # rubocop:disable  Metrics/BlockLength
 RSpec.describe Fleet do

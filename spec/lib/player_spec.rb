@@ -1,5 +1,4 @@
-require 'spec_helper'
-require 'player'
+require 'rails_helper'
 
 # rubocop:disable  Metrics/BlockLength
 RSpec.describe Player do

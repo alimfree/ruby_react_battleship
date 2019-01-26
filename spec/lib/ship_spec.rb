@@ -1,6 +1,4 @@
-require 'spec_helper'
-require 'ship'
-require 'board'
+require 'rails_helper'
 
 # rubocop:disable  Metrics/BlockLength
 RSpec.describe Ship do

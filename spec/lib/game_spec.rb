@@ -1,5 +1,4 @@
-require 'spec_helper'
-require 'game'
+require 'rails_helper'
 
 RSpec.describe Game do
   it 'is an instance of Game' do

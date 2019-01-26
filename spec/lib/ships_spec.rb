@@ -1,5 +1,4 @@
-require 'spec_helper'
-require 'ships'
+require 'rails_helper'
 
 RSpec.describe Carrier do
   it 'is an instance of Carrier' do
