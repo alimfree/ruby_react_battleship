@@ -25,8 +25,8 @@ class Fleet
 
       ship.location.each do |coordinates|
         if coordinates == [missile[:x], missile[:y]]
-          ship.hit 
-          return true 
+          ship.hit
+          return true
         end
       end
     end

@@ -16,16 +16,16 @@ class Player
     ship.orientation = options[:orientation]
     ship.coordinates = options[:coordinates]
 
-    ship.place_ship ship, board
+    ship.add ship, board
   end
 
   def fire(opponent, missile)
     direct_hit = opponent.fleet.direct_hit?(opponent, missile)
-    if direct_hit
-      shots_fired.state[missile[:x]][missile[:y]] = 'hit'
-    else
-      shots_fired.state[missile[:x]][missile[:y]] = 'miss'
-    end
+    shots_fired.state[missile[:x]][missile[:y]] = if direct_hit
+                                                    'hit'
+                                                  else
+                                                    'miss'
+                                                  end
     @shots_fired
   end
 end

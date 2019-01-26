@@ -4,7 +4,6 @@ require 'player'
 
 # rubocop:disable  Metrics/BlockLength
 RSpec.describe Fleet do
-
   let(:opponent) do
     options = {
       type: 'carrier',
@@ -16,12 +15,11 @@ RSpec.describe Fleet do
     opponent
   end
 
-
-  it "is an instance of Fleet class" do
-    expect(subject.class.name).to eq "Fleet"
+  it 'is an instance of Fleet class' do
+    expect(subject.class.name).to eq 'Fleet'
   end
 
-  it 'responds to all possible ship types' do
+  it 'it can get all possible ship types' do
     expect(subject.respond_to?(:carrier)).to eq true
     expect(subject.respond_to?(:battleship)).to eq true
     expect(subject.respond_to?(:cruiser)).to eq true
@@ -42,10 +40,13 @@ RSpec.describe Fleet do
     [4, 5, 6, 7, 8].each do |i|
       expect(subject.direct_hit?(opponent, x: i, y: 0)).to eq true
     end
+    expect(opponent.fleet.carrier.health).to eq 0
+    expect(opponent.fleet.carrier.sunk?).to eq true
   end
 
   it '#direct_hit? returns false if an oppnents ship is not hit' do
     expect(subject.direct_hit?(opponent, x: 9, y: 0)).to eq false
+    expect(opponent.fleet.carrier.health).to eq 5
   end
 end
 # rubocop:enable  Metrics/BlockLength

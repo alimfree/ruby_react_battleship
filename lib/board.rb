@@ -2,9 +2,9 @@
 class Board
   attr_accessor :length, :width, :state
 
-  def initialize(x = 10, y = 0)
+  def initialize(x = 10, y = nil)
     @length = x
-    @width = y.zero? ? x : y
+    @width = y.nil? ? x : y
     create
   end
 
