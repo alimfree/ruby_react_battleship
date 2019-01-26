@@ -3,12 +3,12 @@ require 'board.rb'
 
 # Player
 class Player
-  attr_accessor :fleet, :board, :opponent, :shots_board
+  attr_accessor :fleet, :board, :shots_fired
 
   def initialize
     @fleet = Fleet.new
     @board = Board.new
-    @shots_board = Board.new
+    @shots_fired = Board.new
   end
 
   def place_ship(options)
@@ -20,13 +20,12 @@ class Player
   end
 
   def fire(opponent, missile)
-    ship = opponent.fleet.direct_hit?(opponent, missile)
-    if ship
-      ship.hit
-      @shots_board.state[missile[:x]][missile[:y]] = 'hit'
+    direct_hit = opponent.fleet.direct_hit?(opponent, missile)
+    if direct_hit
+      shots_fired.state[missile[:x]][missile[:y]] = 'hit'
     else
-      @shots_board.state[missile[:x]][missile[:y]] = 'miss'
+      shots_fired.state[missile[:x]][missile[:y]] = 'miss'
     end
-    @shots_board
+    @shots_fired
   end
 end

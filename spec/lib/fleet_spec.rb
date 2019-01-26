@@ -4,6 +4,7 @@ require 'player'
 
 # rubocop:disable  Metrics/BlockLength
 RSpec.describe Fleet do
+
   let(:opponent) do
     options = {
       type: 'carrier',
@@ -13,6 +14,11 @@ RSpec.describe Fleet do
     opponent = Player.new
     opponent.place_ship options
     opponent
+  end
+
+
+  it "is an instance of Fleet class" do
+    expect(subject.class.name).to eq "Fleet"
   end
 
   it 'responds to all possible ship types' do

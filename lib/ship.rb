@@ -1,17 +1,17 @@
 # Ship
 class Ship
   attr_accessor :size, :orientation, :health, :type, :coordinates,
-                def initialize(_orientation = :horizontal)
-                  @health = size
-                  @type = self.class.name
-                end
 
   def hit
-    @health -= 1
+    health -= 1 if alive?
   end
 
   def sunk?
-    @health.zero? ? true : false
+    health.zero? ? true : false
+  end
+
+  def alive?
+    !sunk?
   end
 
   def fits?(board)
@@ -30,7 +30,7 @@ class Ship
   end
 
   def mark(board)
-    board.state[coordinates[:x]][coordinates[:y]] = type
+    board.state[coordinates[:x]][coordinates[:y]] = self.class.name
     mark_location(board)
     board
   end
@@ -73,10 +73,10 @@ class Ship
 
   def mark_location(board)
     handle_orientation(board) do |x|
-      board.state[x][coordinates[:y]] = type
+      board.state[x][coordinates[:y]] = self.class.name if horizontal?
     end
     handle_orientation(board) do |y|
-      board.state[coordinates[:x]][y] = type
+      board.state[coordinates[:x]][y] = self.class.name if vertical?
     end
   end
 

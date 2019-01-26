@@ -4,7 +4,8 @@ require 'ship.rb'
 class Carrier < Ship
   def initialize
     @size = 5
-    super
+    @health = size
+    @type = self.class.name
   end
 end
 
@@ -12,7 +13,8 @@ end
 class Battleship < Ship
   def initialize
     @size = 4
-    super
+    @health = size
+    @type = self.class.name
   end
 end
 
@@ -20,7 +22,8 @@ end
 class Cruiser < Ship
   def initialize
     @size = 3
-    super
+    @health = size
+    @type = self.class.name
   end
 end
 
@@ -28,7 +31,8 @@ end
 class Submarine < Ship
   def initialize
     @size = 3
-    super
+    @health = size
+    @type = self.class.name
   end
 end
 
@@ -36,6 +40,7 @@ end
 class Destroyer < Ship
   def initialize
     @size = 2
-    super
+    @health = size
+    @type = self.class.name
   end
 end
