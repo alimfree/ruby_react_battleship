@@ -50,6 +50,23 @@ RSpec.describe Player do
     expect(subject.shots_fired.class.name).to eq 'Board'
     expect(opponent.fleet.carrier.health).to eq 5
   end
+
+  it 'checks if player wins #win?' do
+    opponent = Player.new
+    opponent.fleet.all.each do |ship|
+      ship.size.times { ship.hit }
+    end
+
+    expect(subject.win?(opponent)).to eq true
+  end
+
+  it 'checks if player loses #lose?' do
+    subject.fleet.all.each do |ship|
+      ship.size.times { ship.hit }
+    end
+
+    expect(subject.lose?).to eq true
+  end
 end
 # rubocop:enable  Metrics/BlockLength
 

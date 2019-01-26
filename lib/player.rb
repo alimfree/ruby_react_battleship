@@ -28,4 +28,14 @@ class Player
                                                   end
     @shots_fired
   end
+
+  def win?(opponent)
+    sunk_ships = opponent.fleet.all.select(&:sunk?)
+    sunk_ships.length == opponent.fleet.all.length
+  end
+
+  def lose?
+    sunk_ships = fleet.all.select(&:sunk?)
+    sunk_ships.length == fleet.all.length
+  end
 end
