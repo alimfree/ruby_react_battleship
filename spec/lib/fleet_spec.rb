@@ -1,7 +1,6 @@
 require 'spec_helper'
 require 'fleet'
 require 'player'
-require 'byebug'
 
 # rubocop:disable  Metrics/BlockLength
 RSpec.describe Fleet do

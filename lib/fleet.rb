@@ -5,11 +5,7 @@ require 'ships.rb'
 class Fleet
   attr_reader :carrier, :battleship, :cruiser, :submarine, :destroyer
 
-  Ships = Struct.new(:carrier, :battleship, :cruiser, :submarine, :destroyer) do
-    def to_a
-      [carrier, battleship, cruiser, submarine, destroyer]
-    end
-  end
+  Ships = Struct.new(:carrier, :battleship, :cruiser, :submarine, :destroyer)
 
   def initialize
     @carrier = Carrier.new

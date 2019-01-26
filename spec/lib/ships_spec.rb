@@ -11,16 +11,6 @@ RSpec.describe Carrier do
   end
 end
 
-RSpec.describe Carrier do
-  it 'is a subclass of ship' do
-    expect(Carrier.superclass.name).to eq 'Ship'
-  end
-
-  it 'defaults to size 5' do
-    expect(subject.size).to eq 5
-  end
-end
-
 RSpec.describe Battleship do
   it 'is a subclass of ship' do
     expect(Battleship.superclass.name).to eq 'Ship'
