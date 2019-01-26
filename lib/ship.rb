@@ -14,8 +14,8 @@ class Ship
     @health.zero? ? true : false
   end
 
-  def fits?(_board)
-    return false if out_of_bounds
+  def fits?(board)
+    return false if out_of_bounds(board)
     return false if negative_coordinates
 
     true
@@ -37,8 +37,7 @@ class Ship
 
   def place_ship(ship, board)
     if ship.fits?(board) && ship.does_not_overlap?(board)
-      board.state[ship.coordinates[:x]][ship.coordinates[:y]] = ship.type
-      ship.place_on board
+      mark(board)
     else
       false
     end
@@ -55,7 +54,7 @@ class Ship
   def location
     if horizontal?
       return spread_horizontal { |x| x }.to_a.map do |x|
-        [x, coordinate[:y]]
+        [x, coordinates[:y]]
       end
     end
 
@@ -73,25 +72,25 @@ class Ship
   private
 
   def mark_location(board)
-    handle_orientation(board) do |_b|
+    handle_orientation(board) do |x|
       board.state[x][coordinates[:y]] = type
     end
-    handle_orientation(board) do |_b|
+    handle_orientation(board) do |y|
       board.state[coordinates[:x]][y] = type
     end
   end
 
-  def out_of_bounds
-    return true if out_of_bounds_x
-    return true if out_of_bounds_y
+  def out_of_bounds(board)
+    return true if out_of_bounds_x(board)
+    return true if out_of_bounds_y(board)
   end
 
-  def out_of_bounds_x
+  def out_of_bounds_x(board)
     return true if coordinates[:x] + size > board.length
     return true if board.length - coordinates[:x] < 0
   end
 
-  def out_of_bounds_y
+  def out_of_bounds_y(board)
     return true if coordinates[:y] + size > board.width
     return true if board.width - coordinates[:y] < 0
   end
@@ -101,25 +100,25 @@ class Ship
   end
 
   def overlap(board)
-    handle_orientation(board) { |b| return true if occupied_space(b) }
+    handle_orientation(board) { |i| return true if occupied_space(board, i) }
     false
   end
 
-  def occupied_space
-    return true if occupied_y
-    return true if occupied_x
+  def occupied_space(board, i)
+    return true if occupied_y(board, i)
+    return true if occupied_x(board, i)
   end
 
-  def occupied_x?(board)
+  def occupied_x(board, y)
     vertical? && !board.state[coordinates[:x]][y].empty? ? true : false
   end
 
-  def occupied_y
-    horizontal && !board.state[x][coordinates[:y]].empty? ? true : false
+  def occupied_y(board, x)
+    horizontal? && !board.state[x][coordinates[:y]].empty? ? true : false
   end
 
   def handle_orientation(board)
-    orientation = send("#{orientation}?")
-    send("spread_#{orientation}", board) { |b| yield(b) } if orientation
+    orientation = send("#{self.orientation}?")
+    send("spread_#{self.orientation}", board) { |b| yield(b) } if orientation
   end
 end

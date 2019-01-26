@@ -3,7 +3,13 @@ require 'ships.rb'
 
 # Fleet
 class Fleet
-  attr_reader :carrier, :battleship, :cruiser, :submarine, :destoryer
+  attr_reader :carrier, :battleship, :cruiser, :submarine, :destroyer
+
+  Ships = Struct.new(:carrier, :battleship, :cruiser, :submarine, :destroyer) do
+    def to_a
+      [carrier, battleship, cruiser, submarine, destroyer]
+    end
+  end
 
   def initialize
     @carrier = Carrier.new
@@ -14,7 +20,7 @@ class Fleet
   end
 
   def all
-    [@carrier, @battleship, @cruiser, @submarine, @destroyer]
+    Ships.new(@carrier, @battleship, @cruiser, @submarine, @destroyer)
   end
 
   def direct_hit?(opponent, missile)
@@ -22,7 +28,7 @@ class Fleet
       next if ship.location.nil?
 
       ship.location.each do |coordinates|
-        return ship if coordinates == [missile[:x], missile[:y]]
+        return true if coordinates == [missile[:x], missile[:y]]
       end
     end
     false
