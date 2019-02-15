@@ -122,3 +122,12 @@ Processing by Rails::WelcomeController#index as HTML
 Completed 200 OK in 18ms (Views: 6.6ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/" for 127.0.0.1 at 2019-02-14 18:22:09 -0600
+Processing by StaticPagesController#home as HTML
+  Rendering static_pages/home.html.erb within layouts/application
+  Rendered static_pages/home.html.erb within layouts/application (1.7ms)
+[Webpacker] Compiling…
+[Webpacker] Compiled all packs in /Users/mali/code/ruby/battleship/public/packs
+Completed 200 OK in 5515ms (Views: 5503.4ms | ActiveRecord: 0.0ms)
+
+
