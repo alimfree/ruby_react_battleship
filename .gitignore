@@ -2,7 +2,6 @@ tmp/cache/bootsnap-compile-cache*
 *.swp
 *.log
 *.gem
-Gemfile.lock
 .DS_Store
 tmp*
 public/packs
