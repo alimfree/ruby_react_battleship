@@ -2,7 +2,7 @@ require 'rails_helper'
 
 # rubocop:disable  Metrics/BlockLength
 RSpec.describe Player do
-  let(:options) do
+  let(:carrier) do
     {
       type: 'carrier',
       orientation: :horizontal,
@@ -27,7 +27,7 @@ RSpec.describe Player do
   end
 
   it 'can add ship to players board via #place_ship' do
-    board = subject.place_ship(options)
+    board = subject.place_ship(carrier)
     [4, 5, 6, 7, 8].each do |x|
       expect(subject.board.state[x][0]).to eq 'Carrier'
     end
@@ -71,7 +71,7 @@ end
 
 def fire_at_enemy(coordinates)
   opponent = Player.new
-  opponent.place_ship(options)
+  opponent.place_ship(carrier)
 
   subject.fire(opponent, coordinates)
   opponent
