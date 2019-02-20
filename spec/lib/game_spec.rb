@@ -14,7 +14,7 @@ RSpec.describe Game do
   end
 
   it 'finds when game ends #over' do
-    player_one_wins
+    player_one_loses
     expect(subject.over?).to eq true
   end
 
@@ -27,12 +27,12 @@ RSpec.describe Game do
   end
 
   it 'checks if #player_two_wins' do
-    player_one_wins
+    player_one_loses
     expect(subject.player_two_wins?).to eq true
   end
 end
 
-def player_one_wins
+def player_one_loses
   subject.player_one.fleet.all.each do |ship|
     ship.size.times { ship.hit }
   end
